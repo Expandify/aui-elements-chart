@@ -1,0 +1,544 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'aUI';
+    src: url('aui.ttf') format('truetype');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+@keyframes neonPulse {
+    0% {
+        opacity: 0.9;
+        text-shadow: 0 0 3px var(--neon-aui-glow), 0 0 6px var(--neon-aui-glow);
+    }
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 8px var(--neon-aui-glow), 0 0 15px var(--neon-aui-glow), 0 0 45px var(--neon-aui-glow);
+    }
+    100% {
+        opacity: 0.9;
+        text-shadow: 0 0 3px var(--neon-aui-glow), 0 0 6px var(--neon-aui-glow);
+    }
+}
+
+:root {
+    --text-color: white;
+    --container-width: 1000px;
+    --container-padding-x: 24px;
+    --transition-duration: 0.2s;
+    --padding-block: 70px;
+    --column-gap: clamp(0.9375rem, calc(0.4688rem + 2.45vw), 1.875rem);
+
+    --neon-white: #fff;
+
+    --neon-aui: #F0DF47;
+    --neon-aui-glow: rgba(223, 199, 64, 0.4);
+    --neon-roman: #E242CD;
+    --neon-translate: #32cbfd;
+    --sound-color: #fff;
+}
+
+.theme-active {
+       --neon-aui: #32cbfd;
+    --neon-aui-glow: rgba(45, 226, 249, 0.4);
+    --neon-roman: #8D47FE;
+    --neon-translate: #5fcaa9;
+    --sound-color: #5D95FD;
+}
+
+@media (width <= 90.06125rem) {
+    :root {
+        --container-width: 80rem;
+    }
+}
+
+html {
+    /**
+      Пригодится в большинстве ситуаций
+      (когда, например, нужно будет "прижать" футер к низу сайта)
+     */
+    height: 100%;
+    /**
+      Убираем скачок интерфейса по горизонтали
+      при появлении / исчезновении скроллбара
+     */
+    scrollbar-gutter: stable;
+
+}
+
+html,
+:has(:target) {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: clamp(0.875rem, 0.8112745098rem + 0.2614379085vw, 1.125rem);
+    /*background-color: #1A202C;*/
+    background-color: #000;
+    color: var(--text-color);
+    margin: 0;
+    /*padding: 20px;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.background-gradient {
+    position: fixed;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+            circle at top left,
+            rgba(102, 51, 153, 0.3) 0%,
+            transparent 60%
+    ),
+    radial-gradient(
+            circle at bottom right,
+            rgba(0, 102, 204, 0.2) 0%,
+            transparent 70%
+    ),
+    #000; /* базовый тёмный фон */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.switch-wrapper {
+    position: absolute;
+    top: 150px;
+    right: 17vw;
+}
+
+.switch {
+    display: inline-block;
+    position: relative;
+    width: 3rem;
+    height: 2rem;
+}
+
+
+.switch input {
+    opacity: 1;
+    width: 0;
+    height: 0;
+}
+
+.move {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #F0DF47;
+    border-radius: 3rem;
+    border: .1rem solid #ddd;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.move::before {
+    position: absolute;
+    content: '';
+    background: #fff;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 1.5rem;
+    top: 0;
+    bottom: 0;
+    left: 0.12rem;
+    box-shadow: 0 0.2rem 0.5rem #000;
+    transition: 0.5s;
+}
+
+input:checked + .move {
+    background: #5fdd54;
+    border: 0.1rem solid transparent;
+
+}
+
+input:checked + .move::before {
+    transform: translateX(1rem);
+}
+
+
+
+button {
+    padding-block: 20px;
+    padding-inline: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    font-size: 0.92em;
+    color: var(--text-color);
+}
+
+
+button.active, button:hover {
+    color: var(--neon-aui);
+    border-color: var(--neon-aui);
+}
+
+.elements-chart__button {
+    flex-grow: 1;
+    background: none;
+    border: 1px solid white;
+}
+
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    clip-path: inset(100%) !important;
+    clip: rect(0 0 0 0) !important;
+    overflow: hidden !important;
+}
+
+.container {
+    max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
+    margin-inline: auto;
+    padding-inline: var(--container-padding-x);
+}
+
+
+.elements-chart__title {
+    font-size: 3em;
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 35px;
+    background: linear-gradient(to bottom, #ffffff, #a5a5a5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.elements-chart__subtitle {
+    text-align: center;
+    font-size: 2em;
+    color: #7d7f99;
+}
+
+.elements-chart__table-wrapper {
+    padding-block: var(--padding-block);
+}
+
+.elements-chart_controls {
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--column-gap);
+    justify-content: space-between;
+}
+
+.chart {
+    display: grid;
+    /*grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));*/
+    grid-template-columns: repeat(5, 1fr); /* например, 5 колонок */
+    gap: 10px;
+    width: 100%;
+}
+
+.cell {
+    position: relative;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.02);
+    /*background: rgba(9, 11, 99, 0.4);*/
+    background: linear-gradient(341deg, rgba(2, 0, 36, 1) 0%, rgb(24 13 54) 35%, #21116a 70%);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.2),
+    0 0 15px rgba(255, 255, 255, 0.08);
+
+    /*backdrop-filter: blur(15px); !* Эффект "запотевшего стекла" *!*/
+    /*-webkit-backdrop-filter: blur(15px);*/
+
+    border: 1px solid rgba(255, 255, 255, 0.5); /* мягкая граница */
+    /*border: 1px solid var(--neon-white);*/
+    border-radius: 5px;
+    /*box-shadow: 0 0 10px var(--neon-purple), inset 0 0 5px var(--neon-purple);*/
+    animation: borderPulse 4s infinite ease-in-out;
+    transition: all 0.3s;
+}
+
+
+.symbol-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.symbol {
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: 'aUI', sans-serif;
+    font-size: 72px;
+    color: var(--neon-aui);
+    transition: all 0.3s;
+    text-shadow: 0 0 10px var(--neon-aui), 0 0 20px var(--neon-aui);
+    animation: neonPulse 3s infinite ease-in-out;
+}
+
+.roman {
+    position: absolute;
+    top: 42px;
+    right: -30px;
+    font-family: 'Noto Sans', sans-serif;
+    color: var(--neon-roman);
+    font-size: 24px;
+    transition: all 0.3s;
+    /*text-shadow: 0 0 8px var(--neon-roman), 0 0 15px var(--neon-roman);*/
+}
+
+.meaning {
+    display: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.category {
+    color: var(--neon-translate);
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px var(--neon-yellow), 0 0 10px var(--neon-yellow);
+    transition: all 0.3s;
+
+}
+
+.description {
+    display: block;
+    max-width: 120px;
+    padding-bottom: 20px;
+    color: var(--neon-white);
+    font-size: 14px;
+    text-align: center;
+    text-shadow: 0 0 5px var(--neon-yellow);
+    /*opacity: 0;*/
+    transition: opacity 0.3s ease;
+}
+
+
+.numbers {
+    /*grid-column: 2 / -1; !* от первой до последней колонки *!*/
+    grid-column: 4 / 6; /* или 4 / -1, если всего 5 колонок */
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.number-title {
+    color: var(--neon-green);
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-shadow: 0 0 10px var(--neon-green), 0 0 15px var(--neon-green);
+}
+
+.number-subtitle {
+    color: var(--neon-green);
+    margin-bottom: 15px;
+    font-style: italic;
+    font-size: 14px;
+    text-shadow: 0 0 8px var(--neon-green);
+}
+
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+
+.number-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.numbers-symbol-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.number-symbol {
+    font-family: 'aUI', sans-serif;
+    color: var(--neon-aui);
+    font-size: 24px;
+    text-shadow: 0 0 10px var(--neon-purple), 0 0 15px var(--neon-purple);
+    animation: neonPulse 2s infinite ease-in-out;
+}
+
+.number-roman {
+    font-family: 'Noto Sans', sans-serif;
+    color: var(--neon-roman);
+    font-size: 18px;
+    text-shadow: 0 0 8px var(--neon-roman);
+}
+
+.number-name {
+    color: var(--neon-translate);
+    font-size: 14px;
+    text-align: center;
+    text-shadow: 0 0 5px var(--neon-translate);
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.sound {
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    transition: stroke 0.3s ease;
+}
+
+.sound svg {
+    fill: var(--sound-color);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.sound svg:hover {
+   opacity: 1;
+}
+
+.tooltip {
+    position: absolute;
+    left: 50%;
+    top: 100%; /* сразу под .cell */
+    transform: translateX(-50%);
+    margin-top: 10px;
+
+    z-index: 100;
+    padding: 16px;
+    border: 1px solid var(--neon-aui);
+    border-radius: 5px;
+    box-shadow: 0 0 15px var(--neon-aui-glow);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    /*transform: translateY(100px);*/
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+
+.tooltip img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.tooltip p {
+    margin: 0;
+    color: white;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.cell:hover .tooltip {
+    opacity: 1;
+    /*transform: translateY(0);*/
+}
+
+
+/* Всё ДО 1440.98px */
+@media (max-width: 1440.98px) {
+}
+
+/* Всё ПОСЛЕ 1440.98px */
+@media (min-width: 1441px) {
+}
+
+/* Всё ДО 1023.98px */
+@media (max-width: 1023.98px) {
+}
+
+/* Всё ПОСЛЕ 1023.98px */
+@media (min-width: 1024px) {
+}
+
+
+@media (max-width: 845px) {
+    .numbers {
+        grid-column: 1 / -1; /* занимай всю ширину! */
+        order: 2;
+    }
+    .chart {
+        grid-template-columns: repeat(4, 1fr); /* например, 5 колонок */
+    }
+
+}
+
+/* Всё ДО 767.98px */
+@media (max-width: 767.98px) {
+    .chart {
+        grid-template-columns: repeat(3, 1fr); /* например, 5 колонок */
+    }
+}
+
+
+@media (min-width: 542px) and (max-width: 693px) {
+
+}
+
+/* Всё ПОСЛЕ 767.98px */
+@media (min-width: 768px) {
+
+}
+
+/* Всё ДО 480.98px */
+@media (max-width: 480.98px) {
+    :root {
+        --padding-block: 40px;
+    }
+
+    body {
+        padding: 0;
+    }
+
+    .chart {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .number-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+
+}
+
+/* Всё ПОСЛЕ 480.98px */
+@media (min-width: 481px) {
+
+}
+
+/* Всё ДО 375.98px */
+@media (max-width: 375.98px) {
+    .chart {
+        grid-template-columns: none;
+    }
+}
+
+
