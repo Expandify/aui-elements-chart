@@ -34,7 +34,7 @@
 
     --neon-aui: #F0DF47;
     --neon-aui-glow: rgba(223, 199, 64, 0.4);
-    --neon-roman: #E242CD;
+    --neon-roman: #40f24d;
     --neon-translate: #32cbfd;
     --sound-color: #fff;
 }
@@ -248,6 +248,7 @@ button.active, button:hover {
 
 .cell {
     position: relative;
+    aspect-ratio: 1;
     padding: 15px 10px;
     display: flex;
     flex-direction: column;
@@ -258,7 +259,7 @@ button.active, button:hover {
 
     background: rgba(255, 255, 255, 0.02);
     /*background: rgba(9, 11, 99, 0.4);*/
-    background: linear-gradient(341deg, rgba(2, 0, 36, 1) 0%, rgb(24 13 54) 35%, #21116a 70%);
+    background: linear-gradient(341deg, rgba(2, 0, 36, 1) 0%, rgb(24 13 54) 35%, #030a5f 70%);
     box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.2),
     0 0 15px rgba(255, 255, 255, 0.08);
 
@@ -282,10 +283,10 @@ button.active, button:hover {
 }
 
 .symbol {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     text-align: center;
     font-family: 'aUI', sans-serif;
-    font-size: 72px;
+    font-size: 96px;
     color: var(--neon-aui);
     transition: all 0.3s;
     text-shadow: 0 0 10px var(--neon-aui), 0 0 20px var(--neon-aui);
@@ -294,9 +295,10 @@ button.active, button:hover {
 
 .roman {
     position: absolute;
-    top: 42px;
+    top: 65px;
     right: -30px;
     font-family: 'Noto Sans', sans-serif;
+    font-weight: 700;
     color: var(--neon-roman);
     font-size: 24px;
     transition: all 0.3s;
@@ -314,7 +316,7 @@ button.active, button:hover {
 .category {
     color: var(--neon-translate);
     font-weight: bold;
-    font-size: 16px;
+    font-size: 20px;
     margin-bottom: 10px;
     text-shadow: 0 0 5px var(--neon-yellow), 0 0 10px var(--neon-yellow);
     transition: all 0.3s;
@@ -326,7 +328,7 @@ button.active, button:hover {
     max-width: 120px;
     padding-bottom: 20px;
     color: var(--neon-white);
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
     text-shadow: 0 0 5px var(--neon-yellow);
     /*opacity: 0;*/

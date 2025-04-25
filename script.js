@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         chart.classList.remove('symbols-only', 'symbols-roman', 'symbols-meaning');
         setActiveButton(allOnBtn);
 
-        document.querySelectorAll('.symbol, .roman, .category, .number-symbol, .number-roman, .number-name, .number-title, .number-subtitle').forEach(el => {
+        document.querySelectorAll('.symbol, .roman, .description, .category, .number-symbol, .number-roman, .number-name, .number-title, .number-subtitle').forEach(el => {
             el.classList.remove('hidden');
         });
     });
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     symbolsMeaningBtn.addEventListener('click', function () {
         setActiveButton(symbolsMeaningBtn);
 
-        document.querySelectorAll('.symbol, .category, .number-symbol, .number-name, .number-title').forEach(el => {
+        document.querySelectorAll('.symbol, .category, .description, .number-symbol, .number-name, .number-title').forEach(el => {
             el.classList.remove('hidden');
         });
 
