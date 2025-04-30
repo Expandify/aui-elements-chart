@@ -40,7 +40,7 @@
 }
 
 .theme-active {
-       --neon-aui: #32cbfd;
+    --neon-aui: #32cbfd;
     --neon-aui-glow: rgba(45, 226, 249, 0.4);
     --neon-roman: #8D47FE;
     --neon-translate: #5fcaa9;
@@ -165,7 +165,6 @@ input:checked + .move::before {
 }
 
 
-
 button {
     padding-block: 20px;
     padding-inline: 20px;
@@ -244,9 +243,11 @@ button.active, button:hover {
     grid-template-columns: repeat(5, 1fr); /* например, 5 колонок */
     gap: 10px;
     width: 100%;
+    align-items: stretch;
 }
 
 .cell {
+    box-sizing: border-box;
     position: relative;
     aspect-ratio: 1;
     padding: 15px 10px;
@@ -283,7 +284,7 @@ button.active, button:hover {
 }
 
 .symbol {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     text-align: center;
     font-family: 'aUI', sans-serif;
     font-size: 96px;
@@ -422,7 +423,7 @@ button.active, button:hover {
 }
 
 .sound svg:hover {
-   opacity: 1;
+    opacity: 1;
 }
 
 .tooltip {
@@ -488,6 +489,7 @@ button.active, button:hover {
         grid-column: 1 / -1; /* занимай всю ширину! */
         order: 2;
     }
+
     .chart {
         grid-template-columns: repeat(4, 1fr); /* например, 5 колонок */
     }
