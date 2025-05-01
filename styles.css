@@ -30,9 +30,9 @@
     --padding-block: 70px;
     --column-gap: clamp(0.9375rem, calc(0.4688rem + 2.45vw), 1.875rem);
 
-    --neon-white: #fff;
+    --neon-white: #32cbfd;
 
-    --neon-aui: #F0DF47;
+    --neon-aui: #ECFF00;
     --neon-aui-glow: rgba(223, 199, 64, 0.4);
     --neon-roman: #40f24d;
     --neon-translate: #32cbfd;
@@ -40,7 +40,7 @@
 }
 
 .theme-active {
-    --neon-aui: #32cbfd;
+    --neon-aui: #ECFF00;
     --neon-aui-glow: rgba(45, 226, 249, 0.4);
     --neon-roman: #8D47FE;
     --neon-translate: #5fcaa9;
@@ -386,7 +386,7 @@ button.active, button:hover {
 .number-symbol {
     font-family: 'aUI', sans-serif;
     color: var(--neon-aui);
-    font-size: 24px;
+    font-size: 28px;
     text-shadow: 0 0 10px var(--neon-purple), 0 0 15px var(--neon-purple);
     animation: neonPulse 2s infinite ease-in-out;
 }
@@ -394,13 +394,13 @@ button.active, button:hover {
 .number-roman {
     font-family: 'Noto Sans', sans-serif;
     color: var(--neon-roman);
-    font-size: 18px;
+    font-size: 28px;
     text-shadow: 0 0 8px var(--neon-roman);
 }
 
 .number-name {
     color: var(--neon-translate);
-    font-size: 14px;
+    font-size: 20px;
     text-align: center;
     text-shadow: 0 0 5px var(--neon-translate);
 }
