@@ -369,6 +369,7 @@ button.active, button:hover {
 }
 
 .number-cell {
+    margin-top: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -488,6 +489,8 @@ button.active, button:hover {
     .numbers {
         grid-column: 1 / -1; /* занимай всю ширину! */
         order: 2;
+        aspect-ratio: auto;
+        padding-block: 25px;
     }
 
     .chart {

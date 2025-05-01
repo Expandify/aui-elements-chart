@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 });
 
-document.getElementById('themeToggle').addEventListener('change', function () {
-    document.documentElement.classList.toggle('theme-active', this.checked);
-});
+// document.getElementById('themeToggle').addEventListener('change', function () {
+//     document.documentElement.classList.toggle('theme-active', this.checked);
+// });
 
 
 document.querySelectorAll('.sound').forEach(button => {
